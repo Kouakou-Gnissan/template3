@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="detail-produit.css">
+    <link rel="stylesheet" href="boutique.css">
+    <title>Amaro | Robe Élégante Noire</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1><span>A</span>maro<span>.</span></h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="boutique.html" class="nav-link active">Boutique</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="#newsletter" class="nav-link join">S'abonner</a>
+                <div class="nav-actions">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a>
+            <i class="ri-arrow-right-s-line"></i>
+            <a href="boutique.html">Boutique</a>
+            <i class="ri-arrow-right-s-line"></i>
+            <a href="#">Robes</a>
+            <i class="ri-arrow-right-s-line"></i>
+            <span class="current">Robe Élégante Noire</span>
+        </div>
+    </div>
+
+    <!-- Détail Produit -->
+    <section class="product-detail">
+        <div class="product-container">
+            <!-- Gallery Produit -->
+            <div class="product-gallery">
+                <div class="gallery-thumbnails">
+                    <div class="thumbnail active" data-image="assets/product-1.jpg">
+                        <img src="assets/pic-1.jpg" alt="Robe face">
+                    </div>
+                    <div class="thumbnail" data-image="assets/product-1-2.jpg">
+                        <img src="assets/pic-3.jpg" alt="Robe dos">
+                    </div>
+                    <div class="thumbnail" data-image="assets/product-1-3.jpg">
+                        <img src="assets/pic-2.jpg" alt="Robe détail">
+                    </div>
+                    <div class="thumbnail" data-image="assets/product-1-4.jpg">
+                        <img src="assets/pic-4.jpg" alt="Robe matière">
+                    </div>
+                </div>
+                <div class="gallery-main">
+                    <img src="assets/pic-1.jpg" alt="Robe Élégante Noire" id="main-image">
+                    <div class="product-badge">Nouveau</div>
+                    <button class="wishlist-btn">
+                        <i class="ri-heart-line"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info Produit -->
+            <div class="product-info">
+                <div class="product-header">
+                    <h1>Robe Élégante Noire</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                        </div>
+                        <span class="rating-count">(48 avis)</span>
+                    </div>
+                </div>
+
+                <div class="product-price">
+                    <span class="current-price">€189</span>
+                    <span class="original-price">€229</span>
+                    <span class="discount">-17%</span>
+                </div>
+
+                <p class="product-description">
+                    Robe cocktail en soie naturelle, coupée pour épouser vos formes avec élégance. 
+                    Col V plongeant et dos nu, cette pièce unique allie sophistication et modernité.
+                </p>
+
+                <div class="product-features">
+                    <div class="feature">
+                        <i class="ri-t-shirt-line"></i>
+                        <span>100% Soie Naturelle</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-ruler-line"></i>
+                        <span>Tailles FR disponibles</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-truck-line"></i>
+                        <span>Livraison gratuite</span>
+                    </div>
+                </div>
+
+                <!-- Sélection Taille -->
+                <div class="size-selection">
+                    <label>Taille:</label>
+                    <div class="size-options">
+                        <div class="size-option">XS</div>
+                        <div class="size-option active">S</div>
+                        <div class="size-option">M</div>
+                        <div class="size-option">L</div>
+                        <div class="size-option">XL</div>
+                    </div>
+                    <a href="#" class="size-guide">Guide des tailles</a>
+                </div>
+
+                <!-- Sélection Couleur -->
+                <div class="color-selection">
+                    <label>Couleur: Noir</label>
+                    <div class="color-options">
+                        <div class="color-option active" style="background-color: #000000;"></div>
+                        <div class="color-option" style="background-color: #8B4513;"></div>
+                        <div class="color-option" style="background-color: #2F4F4F;"></div>
+                    </div>
+                </div>
+
+                <!-- Quantité et Ajout Panier -->
+                <div class="purchase-actions">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart-btn">
+                        <i class="ri-shopping-bag-line"></i>
+                        Ajouter au panier
+                    </button>
+                    <button class="buy-now-btn">
+                        Acheter maintenant
+                    </button>
+                </div>
+
+                <!-- Livraison et Retour -->
+                <div class="delivery-info">
+                    <div class="info-item">
+                        <i class="ri-truck-line"></i>
+                        <div>
+                            <strong>Livraison gratuite</strong>
+                            <p>Délai de 2-3 jours ouvrés</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-arrow-left-right-line"></i>
+                        <div>
+                            <strong>Retours gratuits</strong>
+                            <p>30 jours pour changer d'avis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Description Détaillée -->
+    <section class="product-tabs">
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <div class="tab active" data-tab="description">Description</div>
+                <div class="tab" data-tab="details">Détails</div>
+                <div class="tab" data-tab="reviews">Avis (48)</div>
+                <div class="tab" data-tab="shipping">Livraison</div>
+            </div>
+            
+            <div class="tabs-content">
+                <div class="tab-content active" id="description">
+                    <h3>Robe Signature Amaro</h3>
+                    <p>
+                        Cette robe noire incarne l'essence même de l'élégance Amaro. Confectionnée 
+                        dans une soie naturelle de première qualité, elle offre un tombé parfait 
+                        et un confort incomparable.
+                    </p>
+                    <ul>
+                        <li>Col V plongeant avec finition satin</li>
+                        <li>Dos nu avec lien réglable</li>
+                        <li>Longueur midi - 95cm</li>
+                        <li>Ourlet invisible à la main</li>
+                        <li>Entretien : Nettoyage à sec recommandé</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="details">
+                    <table class="details-table">
+                        <tr>
+                            <td><strong>Composition</strong></td>
+                            <td>100% Soie naturelle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Origine</strong></td>
+                            <td>Confection française</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entretien</strong></td>
+                            <td>Nettoyage à sec uniquement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Poids</strong></td>
+                            <td>320g</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="tab-content" id="reviews">
+                    <div class="reviews-summary">
+                        <div class="average-rating">
+                            <div class="rating-number">4.6</div>
+                            <div class="stars">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                            </div>
+                            <p>48 avis clients</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="reviewer">Sophie M.</div>
+                            <div class="review-rating">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            "Parfaite pour mon mariage ! La qualité de la soie est exceptionnelle 
+                            et la coupe est très flatteuse."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produits Similaires -->
+    <section class="related-products">
+        <div class="section-header">
+            <h2>Produits <span>Similaires</span></h2>
+            <p>Découvrez d'autres pièces qui pourraient vous plaire</p>
+        </div>
+        <div class="products-grid">
+            <!-- Produits similaires -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/product-2.jpg" alt="Robe Rouge">
+                    <div class="product-actions">
+                        <button class="quick-view"><i class="ri-eye-line"></i></button>
+                        <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Robe Rouge Passion</h3>
+                    <p>Robe soirée en satin</p>
+                    <div class="product-price">
+                        <span class="current-price">€159</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/product-3.jpg" alt="Robe Bleue">
+                    <div class="product-actions">
+                        <button class="quick-view"><i class="ri-eye-line"></i></button>
+                        <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Robe Bleu Nuit</h3>
+                    <p>Robe longue en velours</p>
+                    <div class="product-price">
+                        <span class="current-price">€199</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Gallery navigation
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('main-image');
+        
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Remove active class from all thumbnails
+                thumbnails.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked thumbnail
+                this.classList.add('active');
+                // Update main image
+                mainImage.src = this.getAttribute('data-image');
+            });
+        });
+
+        // Size selection
+        const sizeOptions = document.querySelectorAll('.size-option');
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                sizeOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Color selection
+        const colorOptions = document.querySelectorAll('.color-option');
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                colorOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Quantity selector
+        const minusBtn = document.querySelector('.minus');
+        const plusBtn = document.querySelector('.plus');
+        const quantityDisplay = document.querySelector('.quantity');
+        let quantity = 1;
+
+        minusBtn.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityDisplay.textContent = quantity;
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            quantity++;
+            quantityDisplay.textContent = quantity;
+        });
+
+        // Tabs functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Add to cart animation
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        addToCartBtn.addEventListener('click', function() {
+            this.innerHTML = '<i class="ri-check-line"></i> Ajouté !';
+            this.style.background = '#4CAF50';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="ri-shopping-bag-line"></i> Ajouter au panier';
+                this.style.background = '';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

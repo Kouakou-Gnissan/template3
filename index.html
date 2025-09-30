@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Web Design Mastery | Portfolio</title>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h1><span>A</span>maro<span>.</span></h1>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link active">Accueil</a>
+        <a href="boutique.html" class="nav-link">Boutique</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="Boutique.html#newsletter" class="nav-link join">S'abonner</a>
+        <div class="nav-actions">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="cart-count" >0</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="container__left">
+      <div class="profile-section">
+        <div class="ribbon__white">
+          <div class="ribbon-content">
+            <h1><span>A</span>maro<span>.</span></h1>
+            <p>Fashion Designer</p>
+          </div>
+        </div>
+        <div class="ribbon__red"></div>
+        <img src="assets/pic-1.jpg" alt="profile" class="profile-img" />
+      </div>
+    </div>
+
+    <div class="container__right">
+      <div class="content">
+        <h1 class="title">We<br /><span>Understand</span><br />Fashion<span>.</span></h1>
+        <p class="description">
+          Fashion can be defined as a popular trend or style, especially in
+          clothing, footwear, accessories, makeup, or body modification. It is
+          a cultural phenomenon that is constantly evolving and changing with
+          time, place, and social context.
+        </p>
+        <button class="cta-button">Discover More</button>
+      </div>
+
+      <div class="carousal">
+        <div class="slide">
+          <div class="slide__image"></div>
+          <div class="slide-overlay">
+            <h3>Collection 2024</h3>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide__image"></div>
+          <div class="slide-overlay">
+            <h3>Summer Edition</h3>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide__image"></div>
+          <div class="slide-overlay">
+            <h3>Winter Line</h3>
+          </div>
+          <div class="play"><i class="ri-arrow-right-s-line"></i></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Section Collections -->
+  <section class="collections">
+    <div class="collections__header">
+      <h2>Our <span>Collections</span></h2>
+      <p>Discover the latest fashion trends</p>
+    </div>
+    <div class="collections__grid">
+      <div class="collection__item">
+        <div class="collection__image" style="background-image: url('assets/pic-2.jpg')"></div>
+        <h3>Spring Collection</h3>
+        <p>Fresh looks for the new season</p>
+      </div>
+      <div class="collection__item">
+        <div class="collection__image" style="background-image: url('assets/pic-3.jpg')"></div>
+        <h3>Evening Wear</h3>
+        <p>Elegance for special occasions</p>
+      </div>
+      <div class="collection__item">
+        <div class="collection__image" style="background-image: url('assets/pic-4.jpg')"></div>
+        <h3>Casual Style</h3>
+        <p>Comfort meets fashion</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Services -->
+  <section class="services">
+    <div class="services__content">
+      <h2>Our <span>Services</span></h2>
+      <div class="services__list">
+        <div class="service__item">
+          <i class="ri-scissors-cut-line"></i>
+          <h3>Custom Tailoring</h3>
+          <p>Bespoke clothing tailored to perfection</p>
+        </div>
+        <div class="service__item">
+          <i class="ri-user-star-line"></i>
+          <h3>Style Consulting</h3>
+          <p>Personalized fashion advice</p>
+        </div>
+        <div class="service__item">
+          <i class="ri-shopping-bag-line"></i>
+          <h3>Personal Shopping</h3>
+          <p>Curated shopping experiences</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Contact -->
+  <section class="contact" id="contact">
+    <div class="contact__content">
+      <h2>Contact <span>Us</span></h2>
+      <p>Ready to transform your style? Get in touch</p>
+      <form class="contact__form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="join-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+  <script src="script.js"></script>
+  <script>
+
+    // Animations d'entrée
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animation du titre
+      const title = document.querySelector('.title');
+      title.style.opacity = '0';
+      title.style.transform = 'translateY(30px)';
+
+      setTimeout(() => {
+        title.style.transition = 'all 0.8s ease';
+        title.style.opacity = '1';
+        title.style.transform = 'translateY(0)';
+      }, 300);
+
+      // Animation de la description
+      const description = document.querySelector('.description');
+      description.style.opacity = '0';
+      description.style.transform = 'translateX(-30px)';
+
+      setTimeout(() => {
+        description.style.transition = 'all 0.8s ease 0.3s';
+        description.style.opacity = '1';
+        description.style.transform = 'translateX(0)';
+      }, 500);
+
+      // Animation des slides
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.style.opacity = '0';
+        slide.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+          slide.style.transition = `all 0.6s ease ${0.8 + (index * 0.2)}s`;
+          slide.style.opacity = '1';
+          slide.style.transform = 'translateY(0)';
+        }, 800);
+      });
+
+
+      // Animation au survol des slides
+      slides.forEach(slide => {
+        slide.addEventListener('mouseenter', function () {
+          this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+
+        slide.addEventListener('mouseleave', function () {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
