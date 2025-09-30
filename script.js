@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    addcart();
+    
     MobileToggle();
     updateCartCount();
 })
@@ -27,17 +27,15 @@ function MobileToggle() {
 
 //=================================GESTION DU PANIER =========================================================
 
-let cartCount = 1; // on initilise cartCount à 0
+let cartCount = 0; // on initilise cartCount à 0
 
 function addcart() {
-    let cartCount = 0;
+    
     const cartButtons = document.querySelectorAll('.add-to-cart-btn');
     const cartDisplay = document.querySelector('.cart-count');
 
     cartButtons.forEach(button => {
         button.addEventListener('click', function () {
-            cartCount++;
-            cartDisplay.textContent = cartCount;
 
             // Animation feedback
             this.textContent = '✓ Ajouté';
@@ -49,7 +47,9 @@ function addcart() {
             }, 2000);
         });
     });
-}
+    incrementCartCount();
+    updateCartCount();
+};
 
 /**
  * vider completement le panier 
@@ -58,7 +58,6 @@ function clearCart() {
     localStorage.removeItem('cartCount');
     updateCartCount();
 }
-
 
 
 // Lis le compteur actuel depuis localStorage (NE PAS incrémenter)
