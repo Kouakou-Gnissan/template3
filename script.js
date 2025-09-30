@@ -27,7 +27,7 @@ function MobileToggle() {
 
 //=================================GESTION DU PANIER =========================================================
 
-let cartCount = 0; // on initilise cartCount à 0
+let cartCount = 1; // on initilise cartCount à 0
 
 function addcart() {
     let cartCount = 0;
