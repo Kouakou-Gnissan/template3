@@ -65,151 +65,71 @@
                 </select>
             </div>
             <div class="search-box">
-                <input type="text" placeholder="Rechercher un produit...">
+                <input type="text" id="search-products" placeholder="Rechercher un produit...">
                 <i class="ri-search-line"></i>
             </div>
         </div>
     </section>
 
     <!-- Produits -->
-    <section class="products-grid">
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/pic-3.jpg" alt="Robe Élégante">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
+    <section class="products">
+        <div class="products-content">
+            <div class="products-grid">
+                 <!-- Produits card 
+ 
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/product-4.jpg" alt="Chaussures Luxe">
+                        <div class="product-actions">
+                            <button class="quick-view"><i class="ri-eye-line"></i></button>
+                            <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Escarpins Élégants</h3>
+                        <p>Escarpins en daim, talon 8cm</p>
+                        <div class="product-price">
+                            <span class="current-price">€159</span>
+                        </div>
+                        <div class="product-sizes" style=" display: none;">
+                            <span>36</span>
+                            <span>37</span>
+                            <span>38</span>
+                            <span>39</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addcart()">Ajouter au panier</button>
+                    </div>
                 </div>
-                <span class="product-badge">Nouveau</span>
+
+                -->
+
             </div>
-            <div class="product-info">
-                <h3>Robe Élégante Noire</h3>
-                <p>Robe cocktail en soie naturelle</p>
-                <div class="product-price">
-                    <span class="current-price">€189</span>
-                    <span class="original-price">€229</span>
+
+            <!-- Section message aucun produit -->
+            <div id="no-products-message" class="no-products-message" style="display: none;">
+                <div class="message-container">
+                    <i class="ri-search-line"></i>
+                    <h3>Aucun produit trouvé</h3>
+                    <p>Désolé, nous n'avons trouvé aucun produit correspondant à votre recherche.</p>
+                    <button class="cta-button" onclick="clearSearch()">Voir tous les produits</button>
                 </div>
-                <button class="add-to-cart-btn">Ajouter au panier</button>
             </div>
+
+            <!-- Section pagination -->
+            <nav class="pagination-container" aria-label="Pagination navigation">
+                <div class="pagination-info">
+                    Affichage des produits <span id="page-start">1</span>-<span id="page-end">12</span>
+                    sur <span id="total-products">0</span>
+                </div>
+
+                <ul class="pagination" id="pagination">
+                    <!-- Les boutons de pagination seront générés ici par JavaScript -->
+                </ul>
+            </nav>
         </div>
 
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/product-2.jpg" alt="Costume Classique">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
-                </div>
-            </div>
-            <div class="product-info">
-                <h3>Costume Classique</h3>
-                <p>Costume business en laine premium</p>
-                <div class="product-price">
-                    <span class="current-price">€349</span>
-                </div>
-                <div class="product-sizes" style=" display: none;">
-                    <span>38</span>
-                    <span>40</span>
-                    <span>42</span>
-                    <span>44</span>
-                </div>
-                <button class="add-to-cart-btn" id="addcart">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/product-3.jpg" alt="Sac à Main">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
-                </div>
-                <span class="product-badge">Best Seller</span>
-            </div>
-            <div class="product-info">
-                <h3>Sac à Main Cuir</h3>
-                <p>Sac en cuir véritable, fabrication italienne</p>
-                <div class="product-price">
-                    <span class="current-price">€279</span>
-                    <span class="original-price">€329</span>
-                </div>
-                <button class="add-to-cart-btn">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/product-4.jpg" alt="Chaussures Luxe">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
-                </div>
-            </div>
-            <div class="product-info">
-                <h3>Escarpins Élégants</h3>
-                <p>Escarpins en daim, talon 8cm</p>
-                <div class="product-price">
-                    <span class="current-price">€159</span>
-                </div>
-                <div class="product-sizes" style=" display: none;">
-                    <span>36</span>
-                    <span>37</span>
-                    <span>38</span>
-                    <span>39</span>
-                </div>
-                <button class="add-to-cart-btn">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/product-5.jpg" alt="Veste Designer">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
-                </div>
-                <span class="product-badge">-30%</span>
-            </div>
-            <div class="product-info">
-                <h3>Veste Designer</h3>
-                <p>Veste en cachemire, coupe oversized</p>
-                <div class="product-price">
-                    <span class="current-price">€229</span>
-                    <span class="original-price">€329</span>
-                </div>
-                <div class="product-sizes" style=" display: none;">
-                    <span>S</span>
-                    <span>M</span>
-                    <span>L</span>
-                </div>
-                <button class="add-to-cart-btn">Ajouter au panier</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="assets/product-6.jpg" alt="Bijoux">
-                <div class="product-actions">
-                    <button class="quick-view"><i class="ri-eye-line"></i></button>
-                    <button class="add-to-cart"><i class="ri-shopping-bag-line"></i></button>
-                </div>
-            </div>
-            <div class="product-info">
-                <h3>Collier Signature</h3>
-                <p>Collier en or 18k avec diamants</p>
-                <div class="product-price">
-                    <span class="current-price">€899</span>
-                </div>
-                <div class="product-sizes" style=" display: none;">
-                    <span>38</span>
-                    <span>40</span>
-                    <span>42</span>
-                    <span>44</span>
-                </div>
-                <button class="add-to-cart-btn">Ajouter au panier</button>
-            </div>
-        </div>
     </section>
+
 
     <!-- Bannière Promotion -->
     <section class="promo-banner">

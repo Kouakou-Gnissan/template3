@@ -1,35 +1,339 @@
-document.addEventListener('DOMContentLoaded', () => {
 
-    MobileToggle();
-    updateCartCount();
-})
+function showLoading(options = {}) {
+    // Options par défaut
+    const config = {
+        type: options.type || 'spinner', // 'spinner', 'dots', 'skeleton', 'progress'
+        message: options.message || 'Chargement en cours...',
+        duration: options.duration || null, // null pour chargement manuel
+        overlay: options.overlay !== false, // true par défaut
+        target: options.target || document.body,
+        position: options.position || 'center', // 'center', 'top', 'bottom'
+        size: options.size || 'medium', // 'small', 'medium', 'large'
+        theme: options.theme || 'amaro' // 'amaro', 'light', 'dark'
+    };
 
+    // Créer l'élément de loading
+    const loadingEl = document.createElement('div');
+    loadingEl.className = `loading-container loading-${config.theme} loading-${config.size}`;
+    loadingEl.id = 'amaro-loading-' + Date.now();
 
-function MobileToggle() {
-    // Menu mobile
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
+    // Styles pour le loading
+    const styles = `
+        .loading-container {
+            position: ${config.target === document.body ? 'fixed' : 'absolute'};
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: ${config.position === 'top' ? 'flex-start' : config.position === 'bottom' ? 'flex-end' : 'center'};
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(38, 32, 32, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .loading-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: ${config.theme === 'light' ? '#ffffff' : config.theme === 'dark' ? '#262020' : 'var(--secondary-color)'};
+            padding: ${config.size === 'small' ? '20px' : config.size === 'large' ? '40px' : '30px'};
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary-color);
+            min-width: ${config.size === 'small' ? '200px' : config.size === 'large' ? '300px' : '250px'};
+        }
+        
+        /* Spinner Animation */
+        .loading-spinner {
+            width: ${config.size === 'small' ? '30px' : config.size === 'large' ? '50px' : '40px'};
+            height: ${config.size === 'small' ? '30px' : config.size === 'large' ? '50px' : '40px'};
+            border: 3px solid transparent;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        /* Dots Animation */
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .loading-dot {
+            width: ${config.size === 'small' ? '8px' : config.size === 'large' ? '12px' : '10px'};
+            height: ${config.size === 'small' ? '8px' : config.size === 'large' ? '12px' : '10px'};
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        /* Skeleton Loading */
+        .loading-skeleton {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .skeleton-line {
+            height: ${config.size === 'small' ? '12px' : config.size === 'large' ? '16px' : '14px'};
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+            border-radius: 4px;
+        }
+        
+        .skeleton-line.short { width: 70%; }
+        .skeleton-line.medium { width: 85%; }
+        .skeleton-line.long { width: 100%; }
+        
+        /* Progress Bar */
+        .loading-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            animation: progress 2s ease-in-out infinite;
+        }
+        
+        .loading-message {
+            color: var(--extra-light);
+            font-family: 'Poppins', sans-serif;
+            font-size: ${config.size === 'small' ? '14px' : config.size === 'large' ? '18px' : '16px'};
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        
+        /* Thème Amaro */
+        .loading-amaro .loading-content {
+            background: var(--secondary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .loading-light .loading-content {
+            background: #ffffff;
+            color: #333333;
+        }
+        
+        .loading-light .loading-message {
+            color: #333333;
+        }
+        
+        .loading-dark .loading-content {
+            background: #1a1a1a;
+        }
+    `;
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    // Ajouter les styles s'ils n'existent pas déjà
+    if (!document.querySelector('#amaro-loading-styles')) {
+        const styleSheet = document.createElement('style');
+        styleSheet.id = 'amaro-loading-styles';
+        styleSheet.textContent = styles;
+        document.head.appendChild(styleSheet);
+    }
 
-    // Fermer le menu en cliquant sur un lien
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
+    // Structure HTML
+    let loadingHTML = '';
+
+    if (config.overlay) {
+        loadingHTML += '<div class="loading-overlay"></div>';
+    }
+
+    loadingHTML += '<div class="loading-content">';
+
+    switch (config.type) {
+        case 'dots':
+            loadingHTML += `
+                <div class="loading-dots">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            `;
+            break;
+
+        case 'skeleton':
+            loadingHTML += `
+                <div class="loading-skeleton">
+                    <div class="skeleton-line long"></div>
+                    <div class="skeleton-line medium"></div>
+                    <div class="skeleton-line short"></div>
+                </div>
+            `;
+            break;
+
+        case 'progress':
+            loadingHTML += `
+                <div class="loading-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            `;
+            break;
+
+        default: // spinner
+            loadingHTML += '<div class="loading-spinner"></div>';
+    }
+
+    loadingHTML += `<p class="loading-message">${config.message}</p>`;
+    loadingHTML += '</div>';
+
+    loadingEl.innerHTML = loadingHTML;
+
+    // Ajouter au DOM
+    if (config.target === document.body) {
+        document.body.style.overflow = 'hidden';
+    }
+    config.target.appendChild(loadingEl);
+
+    // Auto-hide si durée spécifiée
+    if (config.duration) {
+        setTimeout(() => {
+            hideLoading(loadingEl.id);
+        }, config.duration);
+    }
+
+    // Retourner l'ID pour pouvoir le cacher manuellement
+    return loadingEl.id;
+}
+
+// Fonction pour cacher le loading
+function hideLoading(loadingId = null) {
+    let loadingEl;
+
+    if (loadingId) {
+        loadingEl = document.getElementById(loadingId);
+    } else {
+        // Cacher tous les loadings
+        const loadings = document.querySelectorAll('[id^="amaro-loading-"]');
+        if (loadings.length > 0) {
+            loadingEl = loadings[loadings.length - 1];
+        }
+    }
+
+    if (loadingEl) {
+        // Animation de disparition
+        loadingEl.style.opacity = '0';
+        loadingEl.style.transition = 'opacity 0.3s ease';
+
+        setTimeout(() => {
+            if (loadingEl.parentNode) {
+                loadingEl.parentNode.removeChild(loadingEl);
+            }
+
+            // Réactiver le scroll si plus de loadings
+            const remainingLoadings = document.querySelectorAll('[id^="amaro-loading-"]');
+            if (remainingLoadings.length === 0) {
+                document.body.style.overflow = '';
+            }
+        }, 300);
+    }
+}
+
+// Fonction pour mettre à jour le message
+function updateLoadingMessage(loadingId, newMessage) {
+    const loadingEl = document.getElementById(loadingId);
+    if (loadingEl) {
+        const messageEl = loadingEl.querySelector('.loading-message');
+        if (messageEl) {
+            messageEl.textContent = newMessage;
+        }
+    }
+}
+
+// Fonction de loading pour les opérations asynchrones
+async function withLoading(operation, options = {}) {
+    const loadingId = showLoading(options);
+
+    try {
+        const result = await operation();
+        hideLoading(loadingId);
+        return result;
+    } catch (error) {
+        hideLoading(loadingId);
+        throw error;
+    }
 }
 
 
-//=================================GESTION DU PANIER =========================================================
 
 
 
-//===================================Gestion des produits ===============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -474,449 +778,80 @@ function getProduitParId(id) {
     return getProduits().find(produit => produit.id === id);
 }
 
-
-// ==================================================
-// CONFIGURATION ET ÉTAT GLOBAL DE LA BOUTIQUE
-// ==================================================
-
-const configBoutique = {
-    produitsParPage: 6,
-    pageActuelle: 1,
-    produitsTotaux: 0,
-    panier: JSON.parse(localStorage.getItem('panierAmaro')) || []
-};
-
-// ==================================================
-// FONCTION PRINCIPALE D'INITIALISATION
-// ==================================================
-
-/**
- * Initialise toute la boutique au chargement de la page
- */
-function initialiserBoutique() {
-    console.log('🔄 Initialisation de la boutique Amaro...');
-
-    // Afficher un loading pendant le chargement initial
-    afficherLoading('Chargement de nos collections...');
-
-    // Simuler un délai de chargement (remplacez par vos vraies données)
-    setTimeout(() => {
-        const tousProduits = getProduits();
-        afficherProduitsAvecPagination(tousProduits);
-        initialiserRecherche();
-        initialiserFiltres();
-        mettreAJourCompteurPanier();
-        masquerLoading();
-
-        console.log('✅ Boutique initialisée avec succès!');
-    }, 800);
+function getCategories() {
+    const produits = getProduits();
+    return [...new Set(produits.map(produit => produit.categorie))];
 }
 
-// ==================================================
-// GESTION DE L'AFFICHAGE DES PRODUITS
-// ==================================================
-
-/**
- * Affiche les produits avec système de pagination
- * @param {Array} produits - Liste des produits à afficher
- */
-function afficherProduitsAvecPagination(produits) {
-    if (!produits || produits.length === 0) {
-        afficherMessageAucunProduit();
-        return;
-    }
-
-    // Configuration de la pagination
-    configBoutique.produitsTotaux = produits.length;
-    configBoutique.pagesTotales = Math.ceil(produits.length / configBoutique.produitsParPage);
-    configBoutique.pageActuelle = 1;
-
-    // Afficher la première page
-    afficherPageProduits(produits);
-    genererPagination(produits);
+function getMarques() {
+    const produits = getProduits();
+    return [...new Set(produits.map(produit => produit.marque))];
 }
 
-/**
- * Affiche les produits de la page actuelle
- * @param {Array} produits - Liste complète des produits
- */
-function afficherPageProduits(produits) {
-    const debut = (configBoutique.pageActuelle - 1) * configBoutique.produitsParPage;
-    const fin = debut + configBoutique.produitsParPage;
-    const produitsPage = produits.slice(debut, fin);
-
-    const container = document.querySelector('.products-grid');
-    if (!container) return;
-
-    container.innerHTML = produitsPage.map(produit => `
-        <div class="product-card" data-product-id="${produit.id}">
-            <div class="product-image">
-                <img src="${produit.images[0]}" alt="${produit.nom}" 
-                     onerror="this.src='assets/pic-3.jpg'">
-                <div class="product-actions">
-                    <button class="quick-view" onclick="afficherDetailsProduit(${produit.id})">
-                        <i class="ri-eye-line"></i>
-                    </button>
-                    <button class="add-to-cart" onclick="ajouterAuPanier(${produit.id})">
-                        <i class="ri-shopping-bag-line"></i>
-                    </button>
-                </div>
-                ${produit.estNouveau ? '<span class="product-badge">Nouveau</span>' : ''}
-                ${produit.estBestSeller && !produit.estNouveau ? '<span class="product-badge">Best Seller</span>' : ''}
-                ${produit.remise ? `<span class="product-badge">-${produit.remise}%</span>` : ''}
-            </div>
-            <div class="product-info">
-                <h3>${produit.nom}</h3>
-                <p>${produit.description}</p>
-                <div class="product-price">
-                    <span class="current-price">€${produit.prix}</span>
-                    ${produit.prixOriginal ? `<span class="original-price">€${produit.prixOriginal}</span>` : ''}
-                </div>
-                <button class="add-to-cart-btn" onclick="ajouterAuPanier(${produit.id})">
-                    Ajouter au panier
-                </button>
-            </div>
-        </div>
-    `).join('');
-
-    // Mettre à jour les informations de pagination
-    mettreAJourInfosPagination(produits.length, debut, fin);
+function getBestSellers() {
+    return getProduits({ bestSellersSeulement: true });
 }
 
-// ==================================================
-// SYSTÈME DE PAGINATION
-// ==================================================
-
-/**
- * Génère la pagination en bas de page
- * @param {Array} produits - Liste des produits
- */
-function genererPagination(produits) {
-    const paginationEl = document.getElementById('pagination');
-    if (!paginationEl) return;
-
-    paginationEl.innerHTML = '';
-
-    // Bouton Précédent
-    const prevLi = document.createElement('li');
-    const prevLink = document.createElement('a');
-    prevLink.href = '#';
-    prevLink.setAttribute('aria-label', 'Page précédente');
-
-    if (configBoutique.pageActuelle === 1) {
-        prevLink.classList.add('disabled');
-    } else {
-        prevLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            changerPage(configBoutique.pageActuelle - 1, produits);
-        });
-    }
-    prevLink.innerHTML = `<i class="ri-arrow-left-line"></i>`;
-    prevLi.appendChild(prevLink);
-    paginationEl.appendChild(prevLi);
-
-    // Numéros de pages
-    const pages = genererNumerosPages();
-    pages.forEach(page => {
-        const pageLi = document.createElement('li');
-        const link = document.createElement('a');
-
-        if (page === '...') {
-            link.textContent = '...';
-            link.classList.add('dots');
-        } else {
-            link.textContent = page;
-            if (page === configBoutique.pageActuelle) {
-                link.classList.add('active');
-                link.setAttribute('aria-current', 'page');
-            }
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                changerPage(page, produits);
-            });
-        }
-        pageLi.appendChild(link);
-        paginationEl.appendChild(pageLi);
-    });
-
-    // Bouton Suivant
-    const nextLi = document.createElement('li');
-    const nextLink = document.createElement('a');
-    nextLink.href = '#';
-    nextLink.setAttribute('aria-label', 'Page suivante');
-
-    if (configBoutique.pageActuelle === configBoutique.pagesTotales) {
-        nextLink.classList.add('disabled');
-    } else {
-        nextLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            changerPage(configBoutique.pageActuelle + 1, produits);
-        });
-    }
-
-    nextLink.innerHTML = `<i class="ri-arrow-right-line"></i>`;
-    nextLi.appendChild(nextLink);
-    paginationEl.appendChild(nextLi);
+function getNouveautes() {
+    return getProduits({ nouveautesSeulement: true });
 }
 
+// Tous les produits
+const tousLesProduits = getProduits();
 
-/**
- * Change de page avec animation fluide
- * @param {number} nouvellePage - Numéro de la nouvelle page
- * @param {Array} produits - Liste des produits
- */
-function changerPage(nouvellePage, produits) {
+// Robes seulement
+const robes = getProduits({ categorie: 'robes' });
 
-    if (nouvellePage < 1 || nouvellePage > configBoutique.pagesTotales) return;
+// Produits en solde
+const enSolde = getProduits({ prixMax: 100 });
 
-    configBoutique.pageActuelle = nouvellePage;
+// Recherche
+const resultatsRecherche = getProduits({ termeRecherche: 'soie' });
 
-    // Animation de scroll fluide
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// Best-sellers triés par prix
+const bestSellers = getProduits({
+    bestSellersSeulement: true,
+    trierPar: 'prix-croissant'
+});
 
-    // Afficher la nouvelle page
-    afficherPageProduits(produits);
-    genererPagination(produits);
-}
+// Nouveautés en stock
+const nouvellesArrivees = getProduits({
+    nouveautesSeulement: true,
+    enStockSeulement: true
+});
 
-/**
- * Génère les numéros de page avec points de suspension si beaucoup de pages
- * @returns {Array} Liste des numéros de page à afficher
- */
-function genererNumerosPages() {
-    const pages = [];
-    const pageActuelle = configBoutique.pageActuelle;
-    const pagesTotales = configBoutique.pagesTotales;
 
-    if (pagesTotales <= 7) {
-        // Afficher toutes les pages
-        for (let i = 1; i <= pagesTotales; i++) {
-            pages.push(i);
-        }
-    } else {
-        // Logique avec points de suspension pour beaucoup de pages
-        if (pageActuelle <= 4) {
-            for (let i = 1; i <= 5; i++) pages.push(i);
-            pages.push('...');
-            pages.push(pagesTotales);
-        } else if (pageActuelle >= pagesTotales - 3) {
-            pages.push(1);
-            pages.push('...');
-            for (let i = pagesTotales - 4; i <= pagesTotales; i++) pages.push(i);
-        } else {
-            pages.push(1);
-            pages.push('...');
-            for (let i = pageActuelle - 1; i <= pageActuelle + 1; i++) pages.push(i);
-            pages.push('...');
-            pages.push(pagesTotales);
-        }
-    }
 
-    return pages;
-}
 
-/**
- * Met à jour les informations de pagination (produits 1-6 sur 24)
- */
-function mettreAJourInfosPagination(total, debut, fin) {
-    const pageStart = document.getElementById('page-start');
-    const pageEnd = document.getElementById('page-end');
-    const totalProducts = document.getElementById('total-products');
+//===========================================================================
 
-    if (pageStart) pageStart.textContent = total > 0 ? debut + 1 : 0;
-    if (pageEnd) pageEnd.textContent = Math.min(fin, total);
-    if (totalProducts) totalProducts.textContent = total;
-}
-
-// ==================================================
-// SYSTÈME DE RECHERCHE
-// ==================================================
-
-/**
- * Initialise la recherche en temps réel
- */
-function initialiserRecherche() {
-    const searchInput = document.getElementById('search-products');
-
-    if (searchInput) {
-        let timeoutId;
-
-        searchInput.addEventListener('input', function () {
-            clearTimeout(timeoutId);
-
-            // Afficher loading pendant la recherche
-            afficherLoading('Recherche en cours...');
-
-            timeoutId = setTimeout(() => {
-                const terme = this.value.trim();
-                const tousProduits = getProduits();
-                const produitsFiltres = rechercherProduits(terme, tousProduits);
-
-                afficherProduitsAvecPagination(produitsFiltres);
-                masquerLoading();
-            }, 500);
-        });
-    }
-}
-
-/**
- * Recherche des produits par terme
- * @param {string} terme - Terme de recherche
- * @param {Array} produits - Liste des produits
- * @returns {Array} Produits filtrés
- */
-function rechercherProduits(terme, produits) {
-    if (!terme) return produits;
-
-    const termeMin = terme.toLowerCase();
-    return produits.filter(produit =>
-        produit.nom.toLowerCase().includes(termeMin) ||
-        produit.description.toLowerCase().includes(termeMin) ||
-        produit.marque.toLowerCase().includes(termeMin) ||
-        produit.categorie.toLowerCase().includes(termeMin)
-    );
-}
-
-// ==================================================
-// GESTION DU PANIER
-// ==================================================
-
-/**
- * Ajoute un produit au panier
- * @param {number} productId - ID du produit à ajouter
- */
-function ajouterAuPanier(productId) {
-    const produit = getProduitParId(productId);
-    if (!produit) return;
-
-    // Vérifier si le produit est déjà dans le panier
-    const existingItem = configBoutique.panier.find(item => item.id === productId);
-
-    if (existingItem) {
-        existingItem.quantite += 1;
-    } else {
-        configBoutique.panier.push({
-            id: produit.id,
-            nom: produit.nom,
-            prix: produit.prix,
-            image: produit.images[0],
-            quantite: 1
-        });
-    }
-
-    // Sauvegarder dans le localStorage
-    localStorage.setItem('panierAmaro', JSON.stringify(configBoutique.panier));
-
-    // Animation de confirmation
-    const btn = event.target.closest('button');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="ri-check-line"></i> Ajouté !';
-    btn.style.background = '#4CAF50';
-
-    setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = '';
-    }, 2000);
-
-    // Mettre à jour le compteur
-    mettreAJourCompteurPanier();
-}
-
-/**
- * Met à jour le compteur d'articles dans le panier
- */
-function mettreAJourCompteurPanier() {
-    const compteur = document.querySelector('.cart-count');
-    if (compteur) {
-        const totalItems = configBoutique.panier.reduce((sum, item) => sum + item.quantite, 0);
-        compteur.textContent = totalItems;
-    }
-}
-
-// ==================================================
-// MESSAGES ET LOADING
-// ==================================================
-
-/**
- * Affiche un message quand aucun produit n'est trouvé :cite[1]:cite[6]
- */
-function afficherMessageAucunProduit() {
-    const container = document.querySelector('.products-grid');
-    const messageVide = document.getElementById('no-products-message');
-
-    if (container) container.innerHTML = '';
-    if (messageVide) messageVide.style.display = 'block';
-}
-
-/**
- * Affiche un loading spinner
- * @param {string} message - Message à afficher
- */
-function afficherLoading(message = 'Chargement...') {
-    masquerLoading(); // Nettoyer d'abord
-
+// Fonctions de loading professionnelles
+function showLoading(message = 'Chargement en cours...') {
+    // Créer l'overlay de loading
     const overlay = document.createElement('div');
-    overlay.className = 'loading-spinner-overlay';
+    overlay.className = 'loading-spinner-overlay active';
     overlay.id = 'loading-spinner';
+
     overlay.innerHTML = `
-        <div class="loading-spinner-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">${message}</div>
-        </div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">${message}</div>
     `;
 
     document.body.appendChild(overlay);
-    setTimeout(() => overlay.classList.add('active'), 10);
+    document.body.classList.add('no-scroll');
+
+    return overlay.id;
 }
 
-/**
- * Masque le loading spinner
- */
-function masquerLoading() {
+function hideLoading() {
     const overlay = document.getElementById('loading-spinner');
     if (overlay) {
         overlay.classList.remove('active');
         setTimeout(() => {
-            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            if (overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+            document.body.classList.remove('no-scroll');
         }, 300);
     }
 }
-
-/**
- * Réinitialise la recherche et affiche tous les produits
- */
-function clearSearch() {
-    const searchInput = document.getElementById('search-products');
-    if (searchInput) searchInput.value = '';
-
-    const tousProduits = getProduits();
-    afficherProduitsAvecPagination(tousProduits);
-}
-
-// ==================================================
-// FONCTIONS D'INITIALISATION DES FILTRES
-// ==================================================
-
-function initialiserFiltres() {
-    // À implémenter selon vos besoins
-    console.log('Filtres initialisés');
-}
-
-function afficherDetailsProduit(productId) {
-    // À implémenter pour la page détail produit
-    console.log('Détails produit:', productId);
-}
-
-// ==================================================
-// LANCEMENT DE LA BOUTIQUE
-// ==================================================
-
-// Démarrer la boutique quand la page est chargée
-document.addEventListener('DOMContentLoaded', initialiserBoutique);
-
-// Rendre les fonctions disponibles globalement pour le HTML
-
-window.ajouterAuPanier = ajouterAuPanier;
-window.changerPage = changerPage;
-window.clearSearch = clearSearch;
-window.afficherDetailsProduit = afficherDetailsProduit;

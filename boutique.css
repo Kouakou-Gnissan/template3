@@ -95,7 +95,18 @@
     color: #666;
 }
 
-/* Grille Produits */
+
+/* section Produits */
+
+.products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.products-content {
+    max-width: 1300px;
+}
 .products-grid {
     max-width: 1200px;
     margin: 3rem auto;
@@ -116,9 +127,11 @@
     
 }
 
-.product-card:hover {
+@media (min-width: 768px) {
+  .product-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .product-image {
@@ -257,6 +270,181 @@
     background: var(--primary-color);
 }
 
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .products-grid {
+        padding: 0 0.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .product-image {
+        height: 180px;
+        /* encore plus petit sur mobile */
+    }
+
+    .product-info {
+        padding: 0.3rem;
+    }
+
+    .product-info h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .product-info p {
+        display: none;
+    }
+
+    .product-price {
+        margin-bottom: 0.5rem;
+    }
+
+
+}
+
+
+/* Section aucun produit */
+.no-products-message {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--secondary-color);
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-container i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.message-container h3 {
+    color: var(--extra-light);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.message-container p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Pagination container */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+}
+
+.pagination-info {
+    color: var(--extra-light);
+    font-size: 0.9rem;
+    opacity: 0.8;
+
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.pagination li {
+    margin: 0;
+}
+
+.pagination a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--extra-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pagination a:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.pagination a.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.pagination a.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination a.disabled:hover {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pagination-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .no-products-message {
+        padding: 2rem 1rem;
+    }
+}
+
+
+
+
 /* Bannière Promotion */
 .promo-banner {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
@@ -328,51 +516,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .filters-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-box input {
-        width: 100%;
-    }
-
-    .products-grid {
-        padding: 0 1rem;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.9rem;
-    }
-
-    .product-image {
-        height: 180px;
-        /* encore plus petit sur mobile */
-    }
-
-    .product-info {
-        padding: 0.3rem;
-    }
-
-    .product-info h3 {
-        font-size: 0.9rem;
-        margin-bottom: 0.3rem;
-    }
-
-    .product-info p {
-        display: none;
-    }
-
-    .product-price {
-        margin-bottom: 0.5rem;
-    }
-
+   
     .newsletter-form {
         flex-direction: column;
     }
