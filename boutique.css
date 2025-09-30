@@ -113,6 +113,7 @@
     transition: all 0.3s ease;
     position: relative;
     max-width: 350px;
+    
 }
 
 .product-card:hover {
@@ -353,6 +354,10 @@
     .product-image {
         height: 180px;
         /* encore plus petit sur mobile */
+    }
+
+    .product-info {
+        padding: 0.3rem;
     }
 
     .product-info h3 {
