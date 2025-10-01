@@ -26,7 +26,7 @@
                 <a href="boutique.html" class="nav-link active">Boutique</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
                 <a href="#newsletter" class="nav-link join">S'abonner</a>
-                <div class="nav-actions">
+                <div class="nav-actions" id="panier">
                     <i class="ri-shopping-bag-line"></i>
                     <span class="cart-count">0</span>
                 </div>
@@ -48,20 +48,11 @@
         <div class="filters-container">
             <div class="filter-group">
                 <label>Catégories:</label>
-                <select>
-                    <option>Toutes les collections</option>
-                    <option>Vêtements</option>
-                    <option>Accessoires</option>
-                    <option>Chaussures</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>Trier par:</label>
-                <select>
-                    <option>Nouveautés</option>
-                    <option>Prix croissant</option>
-                    <option>Prix décroissant</option>
-                    <option>Populaires</option>
+                <select id="categorie-filtre">
+                    <option value="">Toutes les collections</option>
+                    <option value="Vêtements">Vêtements</option>
+                    <option value="Accessoires">Accessoires</option>
+                    <option value="Chaussures">Chaussures</option>
                 </select>
             </div>
             <div class="search-box">
@@ -75,7 +66,7 @@
     <section class="products">
         <div class="products-content">
             <div class="products-grid">
-                 <!-- Produits card 
+                <!-- Produits card 
  
                 <div class="product-card">
                     <div class="product-image">
@@ -151,7 +142,8 @@
             </div>
         </div>
     </section>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="boutique.js"></script>
     <script>
         // Filtres interactifs
         const quickViewButtons = document.querySelectorAll('.quick-view');

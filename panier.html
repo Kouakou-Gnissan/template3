@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amaro | Panier</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="panier.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1><span>A</span>maro<span>.</span></h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="boutique.html" class="nav-link">Boutique</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="boutique.html#newsletter" class="nav-link join">S'abonner</a>
+                <div class="nav-actions" id="panier">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu Principal du Panier -->
+    <main class="cart-container">
+        <div class="cart-content">
+            <!-- Section des Articles du Panier -->
+            <section class="cart-items-section">
+                <h2>Votre Panier</h2>
+                <div class="cart-header">
+                    <div class="cart-header-product">Produit</div>
+                    <div class="cart-header-price">Prix</div>
+                    <div class="cart-header-quantity">Quantité</div>
+                    <div class="cart-header-total">Total</div>
+                    <div class="cart-header-actions">Actions</div>
+                </div>
+
+                <div id="cart-items-container" class="cart-items">
+                    <!-- Les articles du panier seront générés ici par JavaScript -->
+                </div>
+
+                <div class="cart-empty-message" id="cart-empty-message" style="display: none;">
+                    <i class="ri-shopping-cart-line"></i>
+                    <h3>Votre panier est vide</h3>
+                    <p>Découvrez nos dernières collections et trouvez des pièces qui vous ressemblent</p>
+                    <a href="boutique.html" class="cta-button">Découvrir la boutique</a>
+                </div>
+
+                <!-- Résumé du Panier -->
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span id="subtotal">€0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Livraison</span>
+                        <span id="shipping">€0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="total">€0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Formulaire de Commande -->
+            <section class="checkout-section">
+                <h2>Informations de Livraison</h2>
+                <form id="checkout-form" class="checkout-form">
+                    <!-- Informations Personnelles -->
+                    <div class="form-section">
+                        <h3>Informations Personnelles</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Prénom *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Nom *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+
+                    <!-- Adresse de Livraison -->
+                    <div class="form-section">
+                        <h3>Adresse de Livraison</h3>
+                        <div class="form-group">
+                            <label for="address">Adresse *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Ville *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postalCode">Code Postal *</label>
+                                <input type="text" id="postalCode" name="postalCode" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pays *</label>
+                            <select id="country" name="country" required>
+                                <option value="">Sélectionnez un pays</option>
+                                <option value="france">France</option>
+                                <option value="belgique">Belgique</option>
+                                <option value="suisse">Suisse</option>
+                                <option value="luxembourg">Luxembourg</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Méthode de Livraison -->
+                    <div class="form-section">
+                        <h3>Méthode de Livraison</h3>
+                        <div class="shipping-options">
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping" value="standard" checked>
+                                <span class="radio-custom"></span>
+                                <div class="shipping-info">
+                                    <span class="shipping-name">Livraison Standard</span>
+                                    <span class="shipping-price">Gratuite</span>
+                                    <span class="shipping-time">Délai: 3-5 jours ouvrés</span>
+                                </div>
+                            </label>
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping" value="express">
+                                <span class="radio-custom"></span>
+                                <div class="shipping-info">
+                                    <span class="shipping-name">Livraison Express</span>
+                                    <span class="shipping-price">€9.90</span>
+                                    <span class="shipping-time">Délai: 24-48h</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Informations de Paiement -->
+                    <div class="form-section">
+                        <h3>Informations de Paiement</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="card" checked>
+                                <span class="radio-custom"></span>
+                                <span>Carte de crédit</span>
+                                <i class="ri-bank-card-line"></i>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="paypal">
+                                <span class="radio-custom"></span>
+                                <span>PayPal</span>
+                                <i class="ri-paypal-line"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bouton de Validation -->
+                    <div class="form-section">
+                        <button type="submit" class="checkout-btn" id="checkout-btn">
+                            <i class="ri-lock-line"></i>
+                            Finaliser la commande
+                        </button>
+                        <p class="secure-notice">
+                            <i class="ri-shield-check-line"></i>
+                            Paiement sécurisé - Vos données sont protégées
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+    <script src="panier.js"></script>
+</body>
+
+</html>

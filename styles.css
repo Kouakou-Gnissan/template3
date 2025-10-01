@@ -838,6 +838,13 @@ body {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+.loading-spinner-content {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ align-items: center;
+}
+
 .loading-spinner-overlay.active {
     opacity: 1;
     visibility: visible;
